@@ -399,3 +399,4 @@ fig = corner.corner(
     color="steelblue",
     hist_kwargs={"density": True},
 )
+fig.savefig("corner.png")
