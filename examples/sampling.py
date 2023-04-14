@@ -22,6 +22,7 @@
 #     version: 3.11.3
 # ---
 
+# %%
 import json
 
 import corner
@@ -266,7 +267,7 @@ with pm.Model() as m:
     step2 = pm.NUTS()
     step3 = pm.HamiltonianMC()
 
-    post_data = pm.sample(1000, chains=4, cores=4, step=step1)
+    post_data = pm.sample(1000, chains=4, cores=8, step=step1)
     post_pred = pm.sample_posterior_predictive(post_data)
     prior_pred = pm.sample_prior_predictive(1000)
 
@@ -285,7 +286,7 @@ with pm.Model() as m1:
     # pm.init_nuts(init='advi')
 
     print("... pm.sample: ")
-    post_data_test = pm.sample(1000, chains=4, cores=4, init="advi")
+    post_data_test = pm.sample(1000, chains=4, cores=8, init="advi")
     print("... pm.sample_porsterior_predictive: ")
     post_pred_test = pm.sample_posterior_predictive(post_data_test)
     print("... pm.sample_prior_predictive: ")
