@@ -60,5 +60,5 @@ jobs:
     - name: Run sampling notebooks
       run: |
         cd examples
-        jupyter execute sampling.ipynb
+        python sampling.py
         ls -lhtra
