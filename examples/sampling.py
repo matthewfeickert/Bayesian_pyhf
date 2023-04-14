@@ -132,8 +132,8 @@ prior_dict = prepare_inference.prepare_priors(model, unconstr_dict)
 
 
 # dictionary with keys 'model', 'obs', 'priors', 'precision'
-precision = []
-[precision.append(float(obs[i]) ** (0.5)) for i in range(nBins)]
+# TODO: Just use obs instead of possibly messing up with nBins
+precision = [obs[i] ** 0.5 for i in range(nBins)]
 prepared_model = prepare_inference.prepare_model(
     model=model, observations=obs, precision=precision, priors=prior_dict
 )
@@ -161,8 +161,7 @@ unconstr_dict = {
 prior_dict = prepare_inference.prepare_priors(model, unconstr_dict)
 
 # dictionary with keys 'model', 'obs', 'priors', 'precision'
-precision = []
-[precision.append(float(obs[i]) ** (0.5)) for i in range(nBins)]
+precision = [obs[i] ** 0.5 for i in range(nBins)]
 prepared_model = prepare_inference.prepare_model(
     model=model, observations=obs, precision=1, priors=prior_dict
 )
@@ -267,7 +266,7 @@ with pm.Model() as m:
     step2 = pm.NUTS()
     step3 = pm.HamiltonianMC()
 
-    post_data = pm.sample(1000, chains=4, cores=8, step=step1)
+    post_data = pm.sample(1000, chains=4, cores=12, step=step1)
     post_pred = pm.sample_posterior_predictive(post_data)
     prior_pred = pm.sample_prior_predictive(1000)
 
@@ -286,7 +285,7 @@ with pm.Model() as m1:
     # pm.init_nuts(init='advi')
 
     print("... pm.sample: ")
-    post_data_test = pm.sample(1000, chains=4, cores=8, init="advi")
+    post_data_test = pm.sample(1000, chains=4, cores=12, init="advi")
     print("... pm.sample_porsterior_predictive: ")
     post_pred_test = pm.sample_posterior_predictive(post_data_test)
     print("... pm.sample_prior_predictive: ")
