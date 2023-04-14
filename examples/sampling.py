@@ -356,7 +356,7 @@ plt.vlines(
 plt.scatter(np.arange(nBins), obs, c="k", s=12, zorder=999, label="data")
 plt.legend(loc="upper left")
 
-plt.title(f"Post / Priors, 4 chains, 100 samples")
+plt.title("Post / Priors, 4 chains, 100 samples")
 
 plt.savefig("Metropolis_adviNUsS_ttbar.png")
 
