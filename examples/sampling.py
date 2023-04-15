@@ -121,7 +121,6 @@ nPars = len(model.config.suggested_init())
 
 # Prepare the priors for sampling
 # Unconstrained parameters
-unconstr_dict = {}
 unconstr_dict = {
     "uncon0": {"type": "unconstrained", "type2": "normal", "input": [[20], [1]]},
     # 'uncon1': {'type': 'unconstrained', 'type2': 'normal', 'input': [[2], [1]]}
@@ -266,7 +265,7 @@ with pm.Model() as m:
     step2 = pm.NUTS()
     step3 = pm.HamiltonianMC()
 
-    post_data = pm.sample(1000, chains=4, cores=12, step=step1)
+    post_data = pm.sample(1000, chains=4, cores=16, step=step1)
     post_pred = pm.sample_posterior_predictive(post_data)
     prior_pred = pm.sample_prior_predictive(1000)
 
@@ -285,7 +284,7 @@ with pm.Model() as m1:
     # pm.init_nuts(init='advi')
 
     print("... pm.sample: ")
-    post_data_test = pm.sample(1000, chains=4, cores=12, init="advi")
+    post_data_test = pm.sample(1000, chains=4, cores=16, init="advi")
     print("... pm.sample_porsterior_predictive: ")
     post_pred_test = pm.sample_posterior_predictive(post_data_test)
     print("... pm.sample_prior_predictive: ")
@@ -352,7 +351,7 @@ plt.vlines(
 
 
 # Observations
-plt.scatter(np.arange(nBins), obs, c="k", s=12, zorder=999, label="data")
+plt.scatter(np.arange(nBins), obs, color="black", s=12, zorder=999, label="data")
 plt.legend(loc="upper left")
 
 plt.title("Post / Priors, 4 chains, 100 samples")
@@ -390,13 +389,13 @@ fig = ax.ravel()[0].figure
 fig.savefig("test_normals_posterior.png")
 
 # %%
-fig = corner.corner(
-    prior_pred.prior.Normals[0], hist_kwargs={"density": True}, color="green"
-)
-fig = corner.corner(
-    post_data.posterior.Normals[0],
-    fig=fig,
-    color="steelblue",
-    hist_kwargs={"density": True},
-)
-fig.savefig("corner.png")
+# fig = corner.corner(
+#     prior_pred.prior.Normals[0], hist_kwargs={"density": True}, color="green"
+# )
+# fig = corner.corner(
+#     post_data.posterior.Normals[0],
+#     fig=fig,
+#     color="steelblue",
+#     hist_kwargs={"density": True},
+# )
+# fig.savefig("corner.png")
