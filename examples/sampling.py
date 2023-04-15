@@ -139,31 +139,31 @@ prepared_model = prepare_inference.prepare_model(
 
 # %%
 # with open('SRee_SRmm_Srem.json') as serialized:
-with open("ttbar_ljets_xsec_inclusive_pruned.json") as serialized:
-    spec = json.load(serialized)
+# with open("ttbar_ljets_xsec_inclusive_pruned.json") as serialized:
+#     spec = json.load(serialized)
 
-workspace = pyhf.Workspace(spec)
-model = workspace.model()
+# workspace = pyhf.Workspace(spec)
+# model = workspace.model()
 
-obs = workspace.data(model, include_auxdata=False)
+# obs = workspace.data(model, include_auxdata=False)
 
-nBins = len(model.expected_actualdata(model.config.suggested_init()))
-nPars = len(model.config.suggested_init())
+# nBins = len(model.expected_actualdata(model.config.suggested_init()))
+# nPars = len(model.config.suggested_init())
 
-# Prepare the priors for sampling
-# Unconstrained parameters
-unconstr_dict = {
-    "uncon1": {"type": "unconstrained", "type2": "normal", "input": [[2], [1]]}
-}
+# # Prepare the priors for sampling
+# # Unconstrained parameters
+# unconstr_dict = {
+#     "uncon1": {"type": "unconstrained", "type2": "normal", "input": [[2], [1]]}
+# }
 
-# Create dictionary with all priors (unconstrained, constrained by normal and poisson)
-prior_dict = prepare_inference.prepare_priors(model, unconstr_dict)
+# # Create dictionary with all priors (unconstrained, constrained by normal and poisson)
+# prior_dict = prepare_inference.prepare_priors(model, unconstr_dict)
 
-# dictionary with keys 'model', 'obs', 'priors', 'precision'
-precision = [obs[i] ** 0.5 for i in range(nBins)]
-prepared_model = prepare_inference.prepare_model(
-    model=model, observations=obs, precision=1, priors=prior_dict
-)
+# # dictionary with keys 'model', 'obs', 'priors', 'precision'
+# precision = [obs[i] ** 0.5 for i in range(nBins)]
+# prepared_model = prepare_inference.prepare_model(
+#     model=model, observations=obs, precision=1, priors=prior_dict
+# )
 
 
 # %% [markdown]
