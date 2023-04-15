@@ -363,33 +363,48 @@ plt.title(f"Post / Priors, {n_chains} chains, {n_samples} samples")
 plt.savefig("Metropolis_adviNUsS_ttbar.png")
 
 # %%
-ax = az.plot_trace(prior_pred.prior, var_names="Unconstrained")
-fig = ax.ravel()[0].figure
+algoritm = "Metropolis"
+var_name = "Unconstrained"
+axs = az.plot_trace(prior_pred.prior, var_names=var_name)
+axs.ravel()[0].set_title(f"{algoritm} {var_name}")
+axs.ravel()[1].set_title(f"{algoritm} {var_name}")
+fig = axs.ravel()[0].figure
 fig.savefig("unconstrained_priors.png")
-ax = az.plot_trace(post_data.posterior, var_names="Unconstrained")
-fig = ax.ravel()[0].figure
+axs = az.plot_trace(post_data.posterior, var_names=var_name)
+axs.ravel()[0].set_title(f"{algoritm} {var_name}")
+fig = axs.ravel()[0].figure
 fig.savefig("unconstrained_posterior.png")
 
-ax = az.plot_trace(prior_pred.prior, var_names="Normals")
-fig = ax.ravel()[0].figure
+var_name = "Normals"
+axs = az.plot_trace(prior_pred.prior, var_names=var_name)
+axs.ravel()[0].set_title(f"{algoritm} {var_name}")
+fig = axs.ravel()[0].figure
 fig.savefig("normals_prior.png")
-ax = az.plot_trace(post_data.posterior, var_names="Normals")
-fig = ax.ravel()[0].figure
+axs = az.plot_trace(post_data.posterior, var_names=var_name)
+axs.ravel()[0].set_title(f"{algoritm} {var_name}")
+fig = axs.ravel()[0].figure
 fig.savefig("normals_posterior.png")
 
 # %%
-ax = az.plot_trace(prior_pred_test.prior, var_names="Unconstrained")
-fig = ax.ravel()[0].figure
+algoritm = "NUTS"
+var_name = "Unconstrained"
+axs = az.plot_trace(prior_pred_test.prior, var_names=var_name)
+axs.ravel()[0].set_title(f"{algoritm} {var_name}")
+fig = axs.ravel()[0].figure
 fig.savefig("test_unconstrained_priors.png")
-ax = az.plot_trace(post_data_test.posterior, var_names="Unconstrained")
-fig = ax.ravel()[0].figure
+axs = az.plot_trace(post_data_test.posterior, var_names=var_name)
+axs.ravel()[0].set_title(f"{algoritm} {var_name}")
+fig = axs.ravel()[0].figure
 fig.savefig("test_unconstrained_posterior.png")
 
-ax = az.plot_trace(prior_pred_test.prior, var_names="Normals")
-fig = ax.ravel()[0].figure
+var_name = "Normals"
+axs = az.plot_trace(prior_pred_test.prior, var_names=var_name)
+axs.ravel()[0].set_title(f"{algoritm} {var_name}")
+fig = axs.ravel()[0].figure
 fig.savefig("test_normals_prior.png")
-ax = az.plot_trace(post_data_test.posterior, var_names="Normals")
-fig = ax.ravel()[0].figure
+axs = az.plot_trace(post_data_test.posterior, var_names=var_name)
+axs.ravel()[0].set_title(f"{algoritm} {var_name}")
+fig = axs.ravel()[0].figure
 fig.savefig("test_normals_posterior.png")
 
 # %%
