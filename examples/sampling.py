@@ -253,8 +253,8 @@ expData_op = ExpDataOp()
 # #### Metropolis
 
 n_samples = 10_000
-n_chains = 4
-n_cores = 16
+n_chains = 6
+n_cores = 6
 
 # %%
 # # %%timeit
