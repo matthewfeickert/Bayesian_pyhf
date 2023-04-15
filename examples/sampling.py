@@ -252,6 +252,10 @@ expData_op = ExpDataOp()
 #
 # #### Metropolis
 
+n_samples = 10_000
+n_chains = 4
+n_cores = 16
+
 # %%
 # # %%timeit
 with pm.Model() as m:
@@ -265,9 +269,9 @@ with pm.Model() as m:
     step2 = pm.NUTS()
     step3 = pm.HamiltonianMC()
 
-    post_data = pm.sample(1000, chains=4, cores=16, step=step1)
+    post_data = pm.sample(n_samples, chains=n_chains, cores=n_cores, step=step1)
     post_pred = pm.sample_posterior_predictive(post_data)
-    prior_pred = pm.sample_prior_predictive(1000)
+    prior_pred = pm.sample_prior_predictive(n_samples)
 
 # %% [markdown]
 # #### NUTS
@@ -284,11 +288,11 @@ with pm.Model() as m1:
     # pm.init_nuts(init='advi')
 
     print("... pm.sample: ")
-    post_data_test = pm.sample(1000, chains=4, cores=16, init="advi")
+    post_data_test = pm.sample(n_samples, chains=n_chains, cores=n_cores, init="advi")
     print("... pm.sample_porsterior_predictive: ")
     post_pred_test = pm.sample_posterior_predictive(post_data_test)
     print("... pm.sample_prior_predictive: ")
-    prior_pred_test = pm.sample_prior_predictive(1000)
+    prior_pred_test = pm.sample_prior_predictive(n_samples)
 
 # %%
 # Prior
@@ -354,7 +358,7 @@ plt.vlines(
 plt.scatter(np.arange(nBins), obs, color="black", s=12, zorder=999, label="data")
 plt.legend(loc="upper left")
 
-plt.title("Post / Priors, 4 chains, 100 samples")
+plt.title(f"Post / Priors, {n_chains} chains, {n_samples} samples")
 
 plt.savefig("Metropolis_adviNUsS_ttbar.png")
 
